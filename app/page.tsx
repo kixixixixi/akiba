@@ -260,10 +260,12 @@ const Page: FC = () => {
                     transition: "background-image 0.15s ease-out",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundImage = "linear-gradient(45deg, #6366f1, #8b5cf6)"
+                    e.currentTarget.style.backgroundImage =
+                      "linear-gradient(45deg, #6366f1, #8b5cf6)"
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundImage = "linear-gradient(45deg, #5b5bd6, #7c6dc7)"
+                    e.currentTarget.style.backgroundImage =
+                      "linear-gradient(45deg, #5b5bd6, #7c6dc7)"
                   }}
                 >
                   🔄 新しいクイズに挑戦！ 🔄
@@ -314,7 +316,8 @@ const Page: FC = () => {
                       backgroundImage: backgroundImage,
                       borderRadius: "15px",
                       boxShadow: `0 0 30px ${glowColor}, 0 10px 20px rgba(0, 0, 0, 0.5)`,
-                      transition: "background-image 0.15s ease-out, border-color 0.15s ease-out",
+                      transition:
+                        "background-image 0.15s ease-out, border-color 0.15s ease-out",
                       padding: "1.5rem",
                       border: `4px solid ${borderColor}`,
                       display: "flex",
@@ -334,7 +337,8 @@ const Page: FC = () => {
                     }}
                     onMouseEnter={(e) => {
                       if (!quizCompleted && !isRevealing) {
-                        e.currentTarget.style.backgroundImage = "linear-gradient(45deg, #374151, #4b5563)"
+                        e.currentTarget.style.backgroundImage =
+                          "linear-gradient(45deg, #374151, #4b5563)"
                         e.currentTarget.style.borderColor = "#8b5cf6"
                       }
                     }}
@@ -464,7 +468,8 @@ const Page: FC = () => {
                                     color: "#ffffff",
                                     fontSize: "1rem",
                                     fontWeight: "bold",
-                                    textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)",
+                                    textShadow:
+                                      "1px 1px 2px rgba(0, 0, 0, 0.8)",
                                   }}
                                 >
                                   価格未設定
@@ -476,7 +481,8 @@ const Page: FC = () => {
                                   fontSize: "2rem",
                                   fontWeight: "bold",
                                   color: "#ffff00",
-                                  textShadow: "0 0 20px #ffff00, 2px 2px 4px rgba(0, 0, 0, 0.8)",
+                                  textShadow:
+                                    "0 0 20px #ffff00, 2px 2px 4px rgba(0, 0, 0, 0.8)",
                                   animation: "neon 0.3s ease-in-out infinite",
                                 }}
                               >
@@ -488,7 +494,8 @@ const Page: FC = () => {
                                   fontSize: "2rem",
                                   fontWeight: "bold",
                                   color: "#a855f7",
-                                  textShadow: "0 0 8px #a855f7, 2px 2px 4px rgba(0, 0, 0, 0.8)",
+                                  textShadow:
+                                    "0 0 8px #a855f7, 2px 2px 4px rgba(0, 0, 0, 0.8)",
                                   animation: "pulse 4s infinite",
                                 }}
                               >
@@ -564,7 +571,8 @@ const Page: FC = () => {
                                     alignItems: "center",
                                     marginBottom: "0.25rem",
                                     fontWeight: "500",
-                                    textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)",
+                                    textShadow:
+                                      "1px 1px 2px rgba(0, 0, 0, 0.8)",
                                   }}
                                 >
                                   <span
@@ -690,10 +698,12 @@ const Page: FC = () => {
                 transition: "background-image 0.15s ease-out",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundImage = "linear-gradient(45deg, #9333ea, #7c3aed)"
+                e.currentTarget.style.backgroundImage =
+                  "linear-gradient(45deg, #9333ea, #7c3aed)"
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundImage = "linear-gradient(45deg, #a855f7, #6366f1)"
+                e.currentTarget.style.backgroundImage =
+                  "linear-gradient(45deg, #a855f7, #6366f1)"
               }}
             >
               📱 全店舗一覧を見る 📱

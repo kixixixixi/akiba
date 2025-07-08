@@ -140,66 +140,66 @@ export const shopList = [
     name: "居酒屋 旬の蔵 秋葉原店",
     beer_price: 420,
     locations: ["秋葉原"],
-    note: "九州料理専門、個室あり"
+    note: "九州料理専門、個室あり",
   },
   {
     name: "クラフトビールバー IBrew 秋葉原",
     beer_price: 390,
     locations: ["秋葉原"],
-    note: "ハーフパイント、日本最安値級"
+    note: "ハーフパイント、日本最安値級",
   },
   {
     name: "東京ビデオゲーマーズ",
     beer_price: 1980,
     locations: ["秋葉原"],
-    note: "ゲームコラボ特別ビール"
+    note: "ゲームコラボ特別ビール",
   },
   {
     name: "九州じゃんがら 秋葉原本店",
     beer_price: 450,
     locations: ["秋葉原"],
-    note: "とんこつラーメン専門店"
+    note: "とんこつラーメン専門店",
   },
   {
     name: "新宿たつ吉 秋葉原UDX店",
     beer_price: 600,
     locations: ["秋葉原UDX 3F"],
-    note: "串揚げ専門店"
+    note: "串揚げ専門店",
   },
   {
     name: "メイドカフェ ハニーハニー",
     beer_price: 600,
     locations: ["秋葉原"],
-    note: "メイドカフェ、最低1500円"
+    note: "メイドカフェ、最低1500円",
   },
   {
     name: "キュアメイドカフェ",
     beer_price: 700,
     locations: ["ガチャポン会館6F"],
-    note: "2001年開業の老舗メイドカフェ"
+    note: "2001年開業の老舗メイドカフェ",
   },
   {
     name: "Little TGV",
     beer_price: 450,
     locations: ["秋葉原"],
-    note: "電車テーマ居酒屋"
+    note: "電車テーマ居酒屋",
   },
   {
     name: "丸福珈琲店 ヨドバシAKIBA店",
     beer_price: 500,
     locations: ["ヨドバシAKIBA内"],
-    note: "喫茶店、軽いアルコールあり"
+    note: "喫茶店、軽いアルコールあり",
   },
   {
     name: "ヨドバシAKIBA 8F食堂街",
     beer_price: 550,
     locations: ["ヨドバシAKIBA 8F"],
-    note: "30店舗以上のレストラン街"
+    note: "30店舗以上のレストラン街",
   },
   {
     name: "秋葉原UDX アキバ・イチ",
     beer_price: 520,
     locations: ["秋葉原UDX 2-3F"],
-    note: "20店舗以上のレストラン街"
+    note: "20店舗以上のレストラン街",
   },
 ]
