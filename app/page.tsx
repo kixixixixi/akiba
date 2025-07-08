@@ -12,10 +12,17 @@ const Page: FC = () => {
   const [isRevealing, setIsRevealing] = useState(false)
   const [showFireworks, setShowFireworks] = useState(false)
   const [animatingCards, setAnimatingCards] = useState<number[]>([])
+  const [isClient, setIsClient] = useState(false)
 
   const generateNewQuiz = () => {
     const shopsWithPrices = shopList.filter((shop) => shop.beer_price !== null)
-    const shuffled = [...shopsWithPrices].sort(() => 0.5 - Math.random())
+    
+    // より安定したシャッフル方法を使用
+    const shuffled = [...shopsWithPrices]
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+    }
     const selectedShops = shuffled.slice(0, 3)
 
     const cheapestIndex = selectedShops.reduce((minIndex, shop, index) => {
@@ -34,6 +41,7 @@ const Page: FC = () => {
   }
 
   useEffect(() => {
+    setIsClient(true)
     generateNewQuiz()
   }, [])
 
@@ -49,9 +57,9 @@ const Page: FC = () => {
       setQuizCompleted(true)
       if (index === correctAnswer) {
         setShowFireworks(true)
-        setTimeout(() => setShowFireworks(false), 3000)
+        setTimeout(() => setShowFireworks(false), 1500)
       }
-    }, 2000)
+    }, 800)
   }
 
   return (
@@ -130,22 +138,60 @@ const Page: FC = () => {
               zIndex: 1000,
             }}
           >
-            {[...Array(20)].map((_, i) => (
-              <div
-                key={i}
-                style={{
-                  position: "absolute",
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  width: "10px",
-                  height: "10px",
-                  background: `hsl(${Math.random() * 360}, 100%, 50%)`,
-                  borderRadius: "50%",
-                  animation: "fireworks 1s ease-out infinite",
-                  animationDelay: `${Math.random() * 2}s`,
-                }}
-              />
-            ))}
+            {[...Array(20)].map((_, i) => {
+              const positions = [
+                { top: 10, left: 15 },
+                { top: 20, left: 85 },
+                { top: 30, left: 25 },
+                { top: 40, left: 75 },
+                { top: 50, left: 35 },
+                { top: 60, left: 65 },
+                { top: 70, left: 45 },
+                { top: 80, left: 55 },
+                { top: 15, left: 90 },
+                { top: 25, left: 10 },
+                { top: 35, left: 80 },
+                { top: 45, left: 20 },
+                { top: 55, left: 70 },
+                { top: 65, left: 30 },
+                { top: 75, left: 60 },
+                { top: 85, left: 40 },
+                { top: 90, left: 50 },
+                { top: 5, left: 95 },
+                { top: 95, left: 5 },
+                { top: 50, left: 50 }
+              ]
+              const colors = [
+                "hsl(0, 100%, 50%)",
+                "hsl(60, 100%, 50%)",
+                "hsl(120, 100%, 50%)",
+                "hsl(180, 100%, 50%)",
+                "hsl(240, 100%, 50%)",
+                "hsl(300, 100%, 50%)"
+              ]
+              const delays = [0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8]
+              
+              const pos = positions[i % positions.length]
+              const color = colors[i % colors.length]
+              const delay = delays[i % delays.length]
+              
+              return (
+                <div
+                  key={i}
+                  style={{
+                    position: "absolute",
+                    top: `${pos.top}%`,
+                    left: `${pos.left}%`,
+                    width: "10px",
+                    height: "10px",
+                    background: color,
+                    borderRadius: "50%",
+                    animation: "fireworks 1s ease-out infinite",
+                    animationDelay: `${delay}s`,
+                  }}
+                />
+              )
+            })}
           </div>
         )}
         <div
@@ -280,7 +326,7 @@ const Page: FC = () => {
                 gap: "1.5rem",
               }}
             >
-              {randomShops.map((shop, index) => {
+              {(isClient && randomShops.length > 0) ? randomShops.map((shop, index) => {
                 const isCorrect = correctAnswer === index
                 const isWrong =
                   quizCompleted && selectedShop === index && !isCorrect
@@ -353,45 +399,53 @@ const Page: FC = () => {
                       <div
                         style={{
                           position: "absolute",
-                          top: "-10px",
-                          right: "-10px",
+                          top: "-15px",
+                          right: "-15px",
                           background:
-                            "linear-gradient(45deg, #ff0080, #ffff00)",
-                          color: "#000000",
-                          padding: "1rem",
+                            "linear-gradient(45deg, #10b981, #34d399)",
+                          color: "#ffffff",
+                          width: "60px",
+                          height: "60px",
                           borderRadius: "50%",
-                          fontSize: "1.5rem",
+                          fontSize: "2rem",
                           fontWeight: "bold",
                           border: "3px solid #ffffff",
-                          boxShadow: "0 0 20px #ffff00",
+                          boxShadow: "0 0 20px #10b981",
                           animation: "pulse 0.5s infinite",
-                          textShadow: "2px 2px 4px #ffffff",
+                          textShadow: "2px 2px 4px #000000",
                           zIndex: 10,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
                         }}
                       >
-                        🎉
+                        ✅
                       </div>
                     )}
                     {quizCompleted && isWrong && (
                       <div
                         style={{
                           position: "absolute",
-                          top: "-10px",
-                          right: "-10px",
+                          top: "-15px",
+                          right: "-15px",
                           background:
-                            "linear-gradient(45deg, #ff0000, #000000)",
+                            "linear-gradient(45deg, #ef4444, #dc2626)",
                           color: "#ffffff",
-                          padding: "1rem",
+                          width: "60px",
+                          height: "60px",
                           borderRadius: "50%",
-                          fontSize: "1.5rem",
+                          fontSize: "2rem",
                           fontWeight: "bold",
                           border: "3px solid #ffffff",
-                          boxShadow: "0 0 20px #ff0000",
+                          boxShadow: "0 0 20px #ef4444",
                           textShadow: "2px 2px 4px #000000",
                           zIndex: 10,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
                         }}
                       >
-                        💥
+                        ❌
                       </div>
                     )}
                     <div
@@ -594,7 +648,11 @@ const Page: FC = () => {
                     </div>
                   </div>
                 )
-              })}
+              }) : (
+                <div style={{ textAlign: "center", padding: "2rem", color: "#ffffff" }}>
+                  <p>読み込み中...</p>
+                </div>
+              )}
             </div>
           </section>
 
