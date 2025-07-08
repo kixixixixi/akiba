@@ -60,9 +60,9 @@ const Page: FC = () => {
         style={{
           minHeight: "100vh",
           background:
-            "linear-gradient(45deg, #ff0080, #ff8c00, #40e0d0, #ff0080, #ff8c00)",
-          backgroundSize: "400% 400%",
-          animation: "gradientShift 3s ease infinite",
+            "linear-gradient(45deg, #4f46e5, #7c3aed, #2563eb, #4f46e5)",
+          backgroundSize: "200% 200%",
+          animation: "gradientShift 8s ease infinite",
           color: "#ffffff",
           position: "relative",
           overflow: "hidden",
@@ -78,32 +78,43 @@ const Page: FC = () => {
             *, *::before, *::after {
               box-sizing: border-box;
             }
+            * {
+              will-change: auto;
+            }
+            .animated-element {
+              will-change: transform, opacity;
+              transform: translateZ(0);
+              backface-visibility: hidden;
+              perspective: 1000px;
+            }
             @keyframes gradientShift {
               0% { background-position: 0% 50%; }
               50% { background-position: 100% 50%; }
               100% { background-position: 0% 50%; }
             }
             @keyframes pulse {
-              0% { transform: scale(1); }
-              50% { transform: scale(1.05); }
-              100% { transform: scale(1); }
+              0% { transform: scale3d(1, 1, 1); }
+              50% { transform: scale3d(1.05, 1.05, 1); }
+              100% { transform: scale3d(1, 1, 1); }
             }
             @keyframes shake {
-              0%, 100% { transform: translateX(0); }
-              25% { transform: translateX(-5px); }
-              75% { transform: translateX(5px); }
+              0%, 100% { transform: translate3d(0, 0, 0); }
+              25% { transform: translate3d(-5px, 0, 0); }
+              75% { transform: translate3d(5px, 0, 0); }
             }
             @keyframes fireworks {
-              0% { opacity: 0; transform: scale(0); }
-              50% { opacity: 1; transform: scale(1.5); }
-              100% { opacity: 0; transform: scale(2); }
+              0% { opacity: 0; transform: scale3d(0, 0, 1); }
+              50% { opacity: 1; transform: scale3d(1.5, 1.5, 1); }
+              100% { opacity: 0; transform: scale3d(2, 2, 1); }
             }
             @keyframes neon {
-              0%, 100% { text-shadow: 0 0 5px #ff0080, 0 0 10px #ff0080, 0 0 15px #ff0080; }
-              50% { text-shadow: 0 0 10px #40e0d0, 0 0 20px #40e0d0, 0 0 30px #40e0d0; }
+              0%, 100% { text-shadow: 0 0 8px #4f46e5, 0 0 12px #4f46e5; }
+              50% { text-shadow: 0 0 10px #6366f1, 0 0 15px #6366f1; }
             }
             .gambling-card {
               animation: ${animatingCards.length > 0 ? "shake 0.1s infinite" : "none"};
+              will-change: transform;
+              transform: translateZ(0);
             }
           `}
         </style>
@@ -151,37 +162,39 @@ const Page: FC = () => {
             }}
           >
             <h1
+              className="animated-element"
               style={{
                 fontSize: "3rem",
                 fontWeight: "bold",
                 color: "#ffffff",
                 marginBottom: "1rem",
-                animation: "neon 2s ease-in-out infinite",
+                animation: "neon 6s ease-in-out infinite",
                 textAlign: "center",
-                textShadow: "0 0 20px #ff0080",
+                textShadow: "0 0 15px #4f46e5",
               }}
             >
               🍺 今日はどこで飲む？ 🍺
             </h1>
             <div
+              className="animated-element"
               style={{
-                background: "linear-gradient(45deg, #ff0080, #ffff00)",
+                background: "linear-gradient(45deg, #5b5bd6, #7c6dc7)",
                 padding: "1rem",
                 borderRadius: "10px",
-                border: "3px solid #ffffff",
-                boxShadow: "0 0 20px #ff0080",
-                animation: "pulse 1s infinite",
+                border: "2px solid #c7d2fe",
+                boxShadow: "0 0 12px rgba(99, 102, 241, 0.2)",
+                animation: "pulse 5s infinite",
                 marginBottom: "2rem",
               }}
             >
               <p
                 style={{
                   fontSize: "1.5rem",
-                  color: "#000000",
+                  color: "#ffffff",
                   fontWeight: "bold",
                   textAlign: "center",
                   margin: 0,
-                  textShadow: "2px 2px 4px #ffffff",
+                  textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)",
                 }}
               >
                 ✨ 一番安いお店を当ててみよう！ ✨
@@ -189,7 +202,7 @@ const Page: FC = () => {
               <p
                 style={{
                   fontSize: "1rem",
-                  color: "#000000",
+                  color: "#e2e8f0",
                   fontWeight: "bold",
                   textAlign: "center",
                   margin: "0.5rem 0 0 0",
@@ -214,12 +227,13 @@ const Page: FC = () => {
               }}
             >
               <h2
+                className="animated-element"
                 style={{
                   fontSize: "2rem",
                   fontWeight: "bold",
                   color: "#ffffff",
-                  textShadow: "0 0 10px #ff0080",
-                  animation: "neon 1s ease-in-out infinite",
+                  textShadow: "0 0 8px #4f46e5",
+                  animation: "neon 5s ease-in-out infinite",
                 }}
               >
                 {isRevealing
@@ -230,25 +244,26 @@ const Page: FC = () => {
               </h2>
               {quizCompleted && (
                 <button
+                  className="animated-element"
                   onClick={generateNewQuiz}
                   style={{
-                    background: "linear-gradient(45deg, #ff0080, #ff8c00)",
+                    background: "linear-gradient(45deg, #5b5bd6, #7c6dc7)",
                     color: "white",
                     padding: "1rem 2rem",
-                    borderRadius: "50px",
-                    border: "3px solid #ffffff",
-                    fontSize: "1.2rem",
+                    borderRadius: "25px",
+                    border: "2px solid #c7d2fe",
+                    fontSize: "1.1rem",
                     fontWeight: "bold",
                     cursor: "pointer",
-                    textShadow: "2px 2px 4px #000000",
-                    boxShadow: "0 0 20px #ff0080",
-                    animation: "pulse 1s infinite",
+                    textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)",
+                    boxShadow: "0 4px 12px rgba(99, 102, 241, 0.2)",
+                    transition: "background-image 0.15s ease-out",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "scale(1.1)"
+                    e.currentTarget.style.backgroundImage = "linear-gradient(45deg, #6366f1, #8b5cf6)"
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "scale(1)"
+                    e.currentTarget.style.backgroundImage = "linear-gradient(45deg, #5b5bd6, #7c6dc7)"
                   }}
                 >
                   🔄 新しいクイズに挑戦！ 🔄
@@ -268,24 +283,24 @@ const Page: FC = () => {
                 const isWrong =
                   quizCompleted && selectedShop === index && !isCorrect
 
-                let borderColor = "#ffffff"
-                let backgroundColor = "linear-gradient(45deg, #000000, #333333)"
-                let glowColor = "#ff0080"
+                let borderColor = "#e2e8f0"
+                let backgroundImage = "linear-gradient(45deg, #1e293b, #374151)"
+                let glowColor = "#6366f1"
 
                 if (quizCompleted) {
                   if (isCorrect) {
-                    borderColor = "#00ff00"
-                    backgroundColor = "linear-gradient(45deg, #00ff00, #ffff00)"
-                    glowColor = "#00ff00"
+                    borderColor = "#10b981"
+                    backgroundImage = "linear-gradient(45deg, #059669, #34d399)"
+                    glowColor = "#10b981"
                   } else if (isWrong) {
-                    borderColor = "#ff0000"
-                    backgroundColor = "linear-gradient(45deg, #ff0000, #000000)"
-                    glowColor = "#ff0000"
+                    borderColor = "#ef4444"
+                    backgroundImage = "linear-gradient(45deg, #dc2626, #7f1d1d)"
+                    glowColor = "#ef4444"
                   }
                 } else if (isRevealing) {
-                  backgroundColor =
-                    "linear-gradient(45deg, #ff0080, #40e0d0, #ff8c00)"
-                  glowColor = "#ffff00"
+                  backgroundImage =
+                    "linear-gradient(45deg, #6366f1, #8b5cf6, #a855f7)"
+                  glowColor = "#8b5cf6"
                 }
 
                 return (
@@ -296,10 +311,10 @@ const Page: FC = () => {
                     className="gambling-card"
                     style={{
                       position: "relative",
-                      background: backgroundColor,
+                      backgroundImage: backgroundImage,
                       borderRadius: "15px",
                       boxShadow: `0 0 30px ${glowColor}, 0 10px 20px rgba(0, 0, 0, 0.5)`,
-                      transition: "all 0.3s ease-in-out",
+                      transition: "background-image 0.15s ease-out, border-color 0.15s ease-out",
                       padding: "1.5rem",
                       border: `4px solid ${borderColor}`,
                       display: "flex",
@@ -310,8 +325,8 @@ const Page: FC = () => {
                       cursor:
                         quizCompleted || isRevealing ? "default" : "pointer",
                       transform: animatingCards.includes(index)
-                        ? "scale(1.05)"
-                        : "scale(1)",
+                        ? "scale3d(1.05, 1.05, 1)"
+                        : "scale3d(1, 1, 1)",
                       backgroundSize: isRevealing ? "200% 200%" : "100% 100%",
                       animation: isRevealing
                         ? "gradientShift 0.5s infinite"
@@ -319,14 +334,14 @@ const Page: FC = () => {
                     }}
                     onMouseEnter={(e) => {
                       if (!quizCompleted && !isRevealing) {
-                        e.currentTarget.style.transform = "scale(1.1)"
-                        e.currentTarget.style.boxShadow = `0 0 50px ${glowColor}, 0 20px 40px rgba(0, 0, 0, 0.7)`
+                        e.currentTarget.style.backgroundImage = "linear-gradient(45deg, #374151, #4b5563)"
+                        e.currentTarget.style.borderColor = "#8b5cf6"
                       }
                     }}
                     onMouseLeave={(e) => {
                       if (!quizCompleted && !isRevealing) {
-                        e.currentTarget.style.transform = "scale(1)"
-                        e.currentTarget.style.boxShadow = `0 0 30px ${glowColor}, 0 10px 20px rgba(0, 0, 0, 0.5)`
+                        e.currentTarget.style.backgroundImage = backgroundImage
+                        e.currentTarget.style.borderColor = borderColor
                       }
                     }}
                   >
@@ -391,12 +406,13 @@ const Page: FC = () => {
                           style={{
                             fontSize: "1.125rem",
                             fontWeight: "bold",
-                            color: "#f1f5f9",
+                            color: "#ffffff",
                             marginBottom: "0.75rem",
                             display: "-webkit-box",
                             WebkitLineClamp: 2,
                             WebkitBoxOrient: "vertical",
                             overflow: "hidden",
+                            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.8)",
                           }}
                         >
                           {shop.name}
@@ -418,7 +434,9 @@ const Page: FC = () => {
                             <span
                               style={{
                                 fontSize: "0.875rem",
-                                color: "#94a3b8",
+                                color: "#ffffff",
+                                fontWeight: "600",
+                                textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)",
                               }}
                             >
                               ビール価格
@@ -431,8 +449,8 @@ const Page: FC = () => {
                                     fontWeight: "bold",
                                     color: isCorrect ? "#00ff00" : "#ffffff",
                                     textShadow: isCorrect
-                                      ? "0 0 10px #00ff00"
-                                      : "0 0 10px #ffffff",
+                                      ? "0 0 10px #00ff00, 2px 2px 4px rgba(0, 0, 0, 0.8)"
+                                      : "0 0 10px #ffffff, 2px 2px 4px rgba(0, 0, 0, 0.8)",
                                     animation: isCorrect
                                       ? "pulse 0.5s infinite"
                                       : "none",
@@ -443,9 +461,10 @@ const Page: FC = () => {
                               ) : (
                                 <span
                                   style={{
-                                    color: "#ff0000",
+                                    color: "#ffffff",
                                     fontSize: "1rem",
                                     fontWeight: "bold",
+                                    textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)",
                                   }}
                                 >
                                   価格未設定
@@ -457,7 +476,7 @@ const Page: FC = () => {
                                   fontSize: "2rem",
                                   fontWeight: "bold",
                                   color: "#ffff00",
-                                  textShadow: "0 0 20px #ffff00",
+                                  textShadow: "0 0 20px #ffff00, 2px 2px 4px rgba(0, 0, 0, 0.8)",
                                   animation: "neon 0.3s ease-in-out infinite",
                                 }}
                               >
@@ -468,9 +487,9 @@ const Page: FC = () => {
                                 style={{
                                   fontSize: "2rem",
                                   fontWeight: "bold",
-                                  color: "#ff0080",
-                                  textShadow: "0 0 10px #ff0080",
-                                  animation: "pulse 2s infinite",
+                                  color: "#a855f7",
+                                  textShadow: "0 0 8px #a855f7, 2px 2px 4px rgba(0, 0, 0, 0.8)",
+                                  animation: "pulse 4s infinite",
                                 }}
                               >
                                 💰???💰
@@ -481,18 +500,21 @@ const Page: FC = () => {
                           {shop.note && (
                             <div
                               style={{
-                                background: "#1e3a8a",
-                                border: "1px solid #3b82f6",
-                                borderRadius: "0.25rem",
-                                padding: "0.5rem",
+                                background: "rgba(30, 58, 138, 0.9)",
+                                border: "2px solid #60a5fa",
+                                borderRadius: "0.5rem",
+                                padding: "0.75rem",
                                 marginBottom: "0.75rem",
+                                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.3)",
                               }}
                             >
                               <p
                                 style={{
                                   fontSize: "0.875rem",
-                                  color: "#93c5fd",
+                                  color: "#ffffff",
                                   margin: 0,
+                                  fontWeight: "600",
+                                  textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)",
                                 }}
                               >
                                 {shop.note}
@@ -517,9 +539,10 @@ const Page: FC = () => {
                             <h4
                               style={{
                                 fontSize: "0.875rem",
-                                fontWeight: "500",
-                                color: "#cbd5e1",
+                                fontWeight: "600",
+                                color: "#ffffff",
                                 marginBottom: "0.5rem",
+                                textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)",
                               }}
                             >
                               店舗情報
@@ -536,17 +559,19 @@ const Page: FC = () => {
                                   key={locIndex}
                                   style={{
                                     fontSize: "0.875rem",
-                                    color: "#94a3b8",
+                                    color: "#ffffff",
                                     display: "flex",
                                     alignItems: "center",
                                     marginBottom: "0.25rem",
+                                    fontWeight: "500",
+                                    textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)",
                                   }}
                                 >
                                   <span
                                     style={{
                                       width: "0.5rem",
                                       height: "0.5rem",
-                                      background: "#64748b",
+                                      background: "#ffffff",
                                       borderRadius: "50%",
                                       marginRight: "0.5rem",
                                     }}
@@ -585,9 +610,9 @@ const Page: FC = () => {
                   marginBottom: "1rem",
                   textShadow:
                     selectedShop === correctAnswer
-                      ? "0 0 20px #00ff00"
-                      : "0 0 20px #ff0000",
-                  animation: "neon 1s ease-in-out infinite",
+                      ? "0 0 15px #10b981"
+                      : "0 0 15px #ef4444",
+                  animation: "neon 3s ease-in-out infinite",
                 }}
               >
                 {selectedShop === correctAnswer
@@ -611,60 +636,64 @@ const Page: FC = () => {
           )}
 
           <section
+            className="animated-element"
             style={{
               textAlign: "center",
-              background: "linear-gradient(45deg, #ff0080, #40e0d0)",
+              background: "linear-gradient(45deg, #5b5bd6, #7c6dc7)",
               borderRadius: "20px",
               padding: "3rem",
-              border: "5px solid #ffffff",
-              boxShadow: "0 0 40px #ff0080",
-              animation: "pulse 2s infinite",
+              border: "3px solid #c7d2fe",
+              boxShadow: "0 0 25px rgba(99, 102, 241, 0.3)",
+              animation: "pulse 6s infinite",
             }}
           >
             <h2
+              className="animated-element"
               style={{
                 fontSize: "2.5rem",
                 fontWeight: "bold",
                 color: "#ffffff",
                 marginBottom: "1rem",
-                textShadow: "0 0 20px #000000",
-                animation: "neon 2s ease-in-out infinite",
+                textShadow: "0 0 15px rgba(0, 0, 0, 0.7)",
+                animation: "neon 4s ease-in-out infinite",
               }}
             >
               🍻 もっと探索してみる？ 🍻
             </h2>
             <p
               style={{
-                color: "#000000",
+                color: "#e2e8f0",
                 marginBottom: "2rem",
                 fontSize: "1.5rem",
                 fontWeight: "bold",
-                textShadow: "2px 2px 4px #ffffff",
+                textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)",
               }}
             >
               秋葉原の{shopList.length}店舗をチェックしよう！
             </p>
             <Link
               href="/shops"
+              className="animated-element"
               style={{
                 display: "inline-block",
-                background: "linear-gradient(45deg, #ffff00, #ff0080)",
-                color: "#000000",
+                background: "linear-gradient(45deg, #a855f7, #6366f1)",
+                color: "#ffffff",
                 padding: "1.5rem 3rem",
                 borderRadius: "50px",
                 textDecoration: "none",
                 fontWeight: "bold",
                 fontSize: "1.5rem",
-                border: "4px solid #ffffff",
-                boxShadow: "0 0 30px #ffff00",
-                textShadow: "2px 2px 4px #ffffff",
-                animation: "pulse 1s infinite",
+                border: "3px solid #c7d2fe",
+                boxShadow: "0 0 20px rgba(168, 85, 247, 0.3)",
+                textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)",
+                animation: "pulse 4s infinite",
+                transition: "background-image 0.15s ease-out",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "scale(1.2)"
+                e.currentTarget.style.backgroundImage = "linear-gradient(45deg, #9333ea, #7c3aed)"
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "scale(1)"
+                e.currentTarget.style.backgroundImage = "linear-gradient(45deg, #a855f7, #6366f1)"
               }}
             >
               📱 全店舗一覧を見る 📱
